@@ -3,6 +3,7 @@ import 'Origo';
 const Mapviewlist = function Mapviewlist(options = {}) {
   const {
     links = [],
+    dividerStyle = 'border-top: 1px dashed rgb(0,153,255)', // ~origo blue web safe
     headerTitle = '',
     headerIcon = '#ic_chevron_right_24px'
   } = options;
@@ -72,11 +73,23 @@ const Mapviewlist = function Mapviewlist(options = {}) {
     });
   }
 
+  function createDividerItem() {
+    return Origo.ui.Component({
+      render() {
+        return `<hr id="${this.getId()}" style='${dividerStyle}'/>`;
+      }
+    });
+  }
+
   function createCollapseContent() {
     return Origo.ui.Component({
       onInit() {
         links.forEach(linkProps => {
-          this.addComponent(createLinkItem(linkProps));
+          if (linkProps.title === 'divider') {
+            this.addComponent(createDividerItem());
+          } else {
+            this.addComponent(createLinkItem(linkProps));
+          }
         });
       },
       renderItems() {
