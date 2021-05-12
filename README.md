@@ -16,6 +16,7 @@ The plugin can be loaded like this in an html-file:
 var origo = Origo('index.json');
 origo.on('load', function(viewer) {
 	var mapviewlist = Mapviewlist({
+		dividerStyle: 'border-top: 1px dashed rgb(255,102,0)',
 		links: [
 			{
 				title: 'Map-1',
@@ -30,6 +31,9 @@ origo.on('load', function(viewer) {
 			{
 				title: 'Map-3',
 				url: 'URL to mapview-3'
+			},
+			{
+				title: 'divider'
 			},
 			{
 				title: 'Map-4',
