@@ -30,7 +30,15 @@ module.exports = merge(common, {
     ]
   },  
   devServer: {
-    contentBase: './',
-    port: 9008
+    static: './',
+    port: 9008,
+    devMiddleware: {
+      //index: true,
+      //mimeTypes: { 'text/html': ['phtml'] },
+      //publicPath: '/publicPathForDevServe',
+      //serverSideRender: true,
+      writeToDisk: true
+    },
+    
   }
 });
