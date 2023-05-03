@@ -127,7 +127,6 @@ const Mapviewlist = function Mapviewlist(options = {}) {
       collapseCmp.onRender();
     }
 
-
   });
 };
 
