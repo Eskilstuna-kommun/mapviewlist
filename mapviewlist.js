@@ -119,7 +119,8 @@ const Mapviewlist = function Mapviewlist(options = {}) {
       const collapseCmp = Origo.ui.Collapse({
         headerComponent: createCollapseHeader(),
         contentComponent: createCollapseContent(),
-        collapseX: false
+        collapseX: false,
+        contentStyle: 'max-height: 300px; overflow-y: auto'
       });
 
       mapMenu.appendMenuItem(collapseCmp);
