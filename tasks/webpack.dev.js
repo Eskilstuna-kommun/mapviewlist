@@ -3,7 +3,7 @@ const common = require('./webpack.common.js');
 
 module.exports = merge(common, {
   output: {
-    path: `${__dirname}/../build/js`,
+    path: `${__dirname}/../../origo/plugins`,
     publicPath: '/build/js',
     filename: 'mvl.js',
     libraryTarget: 'var',
