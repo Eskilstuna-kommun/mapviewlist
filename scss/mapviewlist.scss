@@ -1,0 +1,39 @@
+.o-mapviewlist {
+  position: relative;
+  display: inline-block; /* Se till att knappen anpassar sig till dess innehåll */
+  padding: 10px 20px; /* Justera knappens storlek */
+}
+
+/* Kantlinjen runt knappen */
+.o-mapviewlist::before {
+  content: '';
+  position: absolute;
+  top: 12%;
+  left: 70%;
+  transform: translate(-50%, -50%);
+  width: calc(110% - 2px); /* Bredden på vänster halva av kantlinjen */
+  height: calc(100% + 2px); /* Höjden på kantlinjen */
+  border-top: 4px solid rgb(95, 96, 97); /* Färg och tjocklek på övre delen av kantlinjen */
+  border-bottom: 4px solid rgb(95, 96, 97); /* Färg och tjocklek på nedre delen av kantlinjen */
+  border-left: 4px solid rgb(95, 96, 97); /* Färg och tjocklek på vänster del av kantlinjen */
+  border-right: 4px solid rgb(247, 248, 249); /* Färg och tjocklek på höger del av kantlinjen */
+  border-radius: 50px; /* Rundar hörnen för att matcha knappens form */
+  box-sizing: border-box; /* Se till att kantlinjen inkluderar knappens storlek */
+  rotate: -35deg; /* Vrid kantlinjen mot kantlinjens riktning */
+}
+
+/* Pil som pekar mot kantlinjens riktning */
+.o-mapviewlist::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: 50%;
+  right: 2px; /* Justera pilens position mer till vänster */
+  margin-top: -21px; /* Justera pilens position vertikalt */
+  border: 7px solid transparent;
+  border-left-color: rgb(95, 96, 97); /* Färg på pilen, matcha kantlinjens färg */
+  transform: rotate(-2deg); /* Vrid pilen mot kantlinjens riktning */
+}
+
+
