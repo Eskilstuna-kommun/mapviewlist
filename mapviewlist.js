@@ -1,7 +1,6 @@
 import 'Origo';
 
 const Mapviewlist = function Mapviewlist(options = {}) {
-  // const mainbuttonTooltipText = options.tooltipText || 'Välj vy';
   const links = options.links;
   const currentUrl = window.location.href;
   let activeLink = null;
@@ -34,27 +33,30 @@ const Mapviewlist = function Mapviewlist(options = {}) {
     onInit() {
       containerElement = Origo.ui.Element({
         tagName: 'div',
-        cls: 'flex row margin-y'
+        cls: 'flex row'
       });
 
-      // Loopar igenom varje länk som är definierade i index.html och hittar den aktiva länken baserat på den aktuella url:en
+      // Loops through each link defined in index.html and finds the active link based on the current url
       links.forEach((link) => {
         if (link.url === currentUrl) {
           activeLink = link;
         }
 
-        // Om den aktiva länken hittas, använd dess buttonImage som ikon för mapviewlistMainButton och dess tooltiptext
+        // If the active link is found, use its buttonImage as icon for mapviewlistMainButton and its tooltiptext/title
+        // Combines tooltipText and title from index.html to display "Select view, current view: "title"
         const icon = activeLink ? activeLink.buttonImage : '#ic_baseline_link_24px';
-        const tooltipText = link.tooltipText;
+        const title = link.title;
+        const tooltipTextValjvy = link.tooltipText;
+        const combinedTooltip = `${tooltipTextValjvy} ${title}`;
+        const tooltipText = combinedTooltip;
 
         if (currentUrl === link.url) {
-          // console.log('Aktuell URL: ', currentUrl); // Visar aktuell URL i konsolen
-
           mapviewlistMainButton = Origo.ui.Button({
-            cls: 'o-mapviewlist o-measure padding-small margin-bottom-smaller icon-smaller round light box-shadow margin-right-small',
+            cls: 'o-mapviewlist padding-small margin-bottom-smaller margin-right-small icon-smaller round light box-shadow',
             icon,
+            title,
             tooltipText,
-            tooltipPlacement: 'south',
+            tooltipPlacement: 'east',
             click() {
               toggleMainButton();
             }
@@ -64,20 +66,20 @@ const Mapviewlist = function Mapviewlist(options = {}) {
       });
 
       buttons.push(mapviewlistMainButton);
-      // Loopar igenom varje länk som är definierade i index.html
+      // Loops through each link defined in index.html
       links.forEach((link) => {
-        const tooltipText = link.tooltipText;
+        const title = link.title;
         const ButtonImage = link.buttonImage || '#fa-external-link';
 
-        // Kontrollerar att den aktuella länken inte är huvudlänken, eftersom dess buttonImage inte ska inte visas vid klick på huvudknappen
+        // Checks that the current link is not the main link, because its buttonImage should not be displayed on click of the main button
         if (currentUrl !== link.url) {
           const subButton = Origo.ui.Button({
-            cls: 'o-measure padding-small margin-bottom-smaller icon-smaller round light box-shadow margin-right-small hidden',
+            cls: 'o-measure padding-small margin-bottom-smaller margin-right-small icon-smaller round light box-shadow hidden',
             icon: ButtonImage,
-            tooltipText,
+            title,
             tooltipPlacement: 'relative',
             click() {
-              window.location.href = link.url; // Öppnar länken i samma fönster
+              window.location.href = link.url;
             }
           });
 
@@ -88,7 +90,7 @@ const Mapviewlist = function Mapviewlist(options = {}) {
     },
     onAdd(evt) {
       viewer = evt.target;
-      target = `${viewer.getMain().getMapTools().getId()}`;// Placerar komponenten i BottomTools
+      target = `${viewer.getMain().getNavigation().getId()}`; // Places the component in Navigation
       this.addComponents(buttons);
       this.render();
     },
@@ -101,17 +103,17 @@ const Mapviewlist = function Mapviewlist(options = {}) {
     render() {
       let htmlString = `${containerElement.render()}`;
       let el = Origo.ui.dom.html(htmlString);
-      document.getElementById(target).appendChild(el);
+      document.getElementById(target).prepend(el);
 
-      // För att få det verkliga HTML-elementet:
+      // To get the actual HTML element
       const containerElementElement = document.getElementById(containerElement.getId());
 
-      // Renderar mapviewlistMainButton
+      // Renders mapviewlistMainButton
       htmlString = mapviewlistMainButton.render();
       el = Origo.ui.dom.html(htmlString);
       containerElementElement.appendChild(el);
 
-      // Renderar subButtons
+      // Renders subButtons
       subButtons.forEach((subButton) => {
         htmlString = subButton.render();
         el = Origo.ui.dom.html(htmlString);

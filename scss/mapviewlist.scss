@@ -1,39 +1,41 @@
 .o-mapviewlist {
   position: relative;
-  display: inline-block; /* Se till att knappen anpassar sig till dess innehåll */
-  padding: 10px 20px; /* Justera knappens storlek */
 }
 
-/* Kantlinjen runt knappen */
+/* The border around the button */
 .o-mapviewlist::before {
   content: '';
   position: absolute;
   top: 12%;
   left: 70%;
   transform: translate(-50%, -50%);
-  width: calc(110% - 2px); /* Bredden på vänster halva av kantlinjen */
-  height: calc(100% + 2px); /* Höjden på kantlinjen */
-  border-top: 4px solid rgb(95, 96, 97); /* Färg och tjocklek på övre delen av kantlinjen */
-  border-bottom: 4px solid rgb(95, 96, 97); /* Färg och tjocklek på nedre delen av kantlinjen */
-  border-left: 4px solid rgb(95, 96, 97); /* Färg och tjocklek på vänster del av kantlinjen */
-  border-right: 4px solid rgb(247, 248, 249); /* Färg och tjocklek på höger del av kantlinjen */
-  border-radius: 50px; /* Rundar hörnen för att matcha knappens form */
-  box-sizing: border-box; /* Se till att kantlinjen inkluderar knappens storlek */
-  rotate: -35deg; /* Vrid kantlinjen mot kantlinjens riktning */
+  width: calc(110% - 2px); /* The width of the left half of the border */
+  height: calc(100% + 2px); /* The height of the border */
+  border-top: 4px solid rgb(74, 74, 74); /* Color and thickness of the upper part of the border line */
+  border-bottom: 4px solid rgb(74, 74, 74); /* Color and thickness of the lower part of the border line */
+  border-left: 4px solid rgb(74, 74, 74); /* Color and thickness of the left part of the border */
+  border-right: 4px solid rgb(255, 255, 255); /* Color and thickness of the right part of the border */
+  border-radius: 50px; /* Rounds the corners to match the shape of the button */
+  box-sizing: border-box; /* Make sure the border includes the size of the button */
+  rotate: -35deg; /* Turn the border against the direction of the border */
 }
 
-/* Pil som pekar mot kantlinjens riktning */
+/* Arrow pointing to the direction of the border */
 .o-mapviewlist::after {
   content: '';
   position: absolute;
   width: 0;
   height: 0;
   top: 50%;
-  right: 2px; /* Justera pilens position mer till vänster */
-  margin-top: -21px; /* Justera pilens position vertikalt */
+  right: 2px; /* Adjust the arrow position more to the left */
+  margin-top: -22px; /* Adjust the arrow position vertically */
   border: 7px solid transparent;
-  border-left-color: rgb(95, 96, 97); /* Färg på pilen, matcha kantlinjens färg */
-  transform: rotate(-2deg); /* Vrid pilen mot kantlinjens riktning */
+  border-left-color: rgb(74, 74, 74); /* Color of the arrow, match the color of the border */
+  transform: rotate(-2deg); /* Turn the arrow towards the direction of the edge line */
 }
+
+
+
+
 
 

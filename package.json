@@ -8,7 +8,7 @@
     "watch-js": "webpack-dev-server --config ./tasks/webpack.dev.js",
     "watch-sass": "node-sass -w --include-path scss scss/mapviewlist.scss ../origo/plugins/mapviewlist.css",
     "prebuild-sass": "node-sass --include-path scss scss/mapviewlist.scss ../origo/plugins/mapviewlist.css",
-    "build": "webpack --config ./tasks/webpack.prod.js",
+    "build": "webpack --config ./tasks/webpack.prod.js && npm run build-sass",
     "build-dev": "webpack --config ./tasks/webpack.dev.js",
     "build-sass": "node-sass --include-path scss scss/mapviewlist.scss build/css/mapviewlist.css",
     "test": "echo \"Error: no test specified\" && exit 1"
