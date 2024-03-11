@@ -1,6 +1,7 @@
 import 'Origo';
 
 const Mapviewlist = function Mapviewlist(options = {}) {
+  const tooltiptextGeneral = 'Välj vy, nuvarande vy:';
   const links = options.links;
   const currentUrl = window.location.href;
   let activeLink = null;
@@ -43,11 +44,10 @@ const Mapviewlist = function Mapviewlist(options = {}) {
         }
 
         // If the active link is found, use its buttonImage as icon for mapviewlistMainButton and its tooltiptext/title
-        // Combines tooltipText and title from index.html to display "Select view, current view: "title"
+        // Combines tooltiptextGeneral and title from index.html to display "Select view, current view: "title"
         const icon = activeLink ? activeLink.buttonImage : '#ic_baseline_link_24px';
         const title = link.title;
-        const tooltipTextValjvy = link.tooltipText;
-        const combinedTooltip = `${tooltipTextValjvy} ${title}`;
+        const combinedTooltip = `${tooltiptextGeneral} ${title}`;
         const tooltipText = combinedTooltip;
 
         if (currentUrl === link.url) {
