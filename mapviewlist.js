@@ -52,7 +52,7 @@ const Mapviewlist = function Mapviewlist(options = {}) {
 
         if (currentUrl === link.url) {
           mapviewlistMainButton = Origo.ui.Button({
-            cls: 'o-mapviewlist padding-small margin-bottom-smaller margin-right-small icon-smaller round light box-shadow',
+            cls: 'o-mapviewlist padding-small margin-right-small icon-smaller round light box-shadow',
             icon,
             title,
             tooltipText,
@@ -74,7 +74,7 @@ const Mapviewlist = function Mapviewlist(options = {}) {
         // Checks that the current link is not the main link, because its buttonImage should not be displayed on click of the main button
         if (currentUrl !== link.url) {
           const subButton = Origo.ui.Button({
-            cls: 'o-measure padding-small margin-bottom-smaller margin-right-small icon-smaller round light box-shadow hidden',
+            cls: 'padding-small margin-right-small icon-smaller round light box-shadow hidden',
             icon: ButtonImage,
             title,
             tooltipPlacement: 'relative',
