@@ -15,13 +15,13 @@ const Mapviewlist = function Mapviewlist(options = {}) {
 
   function toggleMainButton() {
     if (!isMainButtonActive) {
-      document.getElementById(mapviewlistMainButton.getId()).classList.add('active');
+      document.getElementById(mapviewlistMainButton.getId()).classList.add('active-border');
       subButtons.forEach((button) => {
         document.getElementById(button.getId()).classList.remove('hidden');
       });
       isMainButtonActive = true;
     } else {
-      document.getElementById(mapviewlistMainButton.getId()).classList.remove('active');
+      document.getElementById(mapviewlistMainButton.getId()).classList.remove('active-border');
       subButtons.forEach((button) => {
         document.getElementById(button.getId()).classList.add('hidden');
       });
@@ -34,7 +34,7 @@ const Mapviewlist = function Mapviewlist(options = {}) {
     onInit() {
       containerElement = Origo.ui.Element({
         tagName: 'div',
-        cls: 'flex row'
+        cls: 'subbuttons-container-grid subbutton-row-grid'
       });
 
       // Loops through each link defined in index.html and finds the active link based on the current url
@@ -44,7 +44,7 @@ const Mapviewlist = function Mapviewlist(options = {}) {
         }
 
         // If the active link is found, use its buttonImage as icon for mapviewlistMainButton and its tooltiptext/title
-        // Combines tooltiptextGeneral and title from index.html to display "Select view, current view: "title"
+        // Combines tooltiptextGeneral and title from index.html to display "Select view, current view: "title".
         const icon = activeLink ? activeLink.buttonImage : '#ic_baseline_link_24px';
         const title = link.title;
         const combinedTooltip = `${tooltiptextGeneral} ${title}`;
@@ -58,7 +58,7 @@ const Mapviewlist = function Mapviewlist(options = {}) {
             tooltipText,
             tooltipPlacement: 'east',
             click() {
-              toggleMainButton();
+              toggleMainButton(mapviewlistMainButton);
             }
 
           });
@@ -74,7 +74,8 @@ const Mapviewlist = function Mapviewlist(options = {}) {
         // Checks that the current link is not the main link, because its buttonImage should not be displayed on click of the main button
         if (currentUrl !== link.url) {
           const subButton = Origo.ui.Button({
-            cls: 'padding-small margin-right-small icon-smaller round light box-shadow hidden',
+            cls: 'subbutton-grid padding-small margin-right-small icon-smaller round light box-shadow hidden',
+            // cls: 'subbuttons-container subbutton padding-small margin-right-small icon-smaller round light box-shadow hidden',
             icon: ButtonImage,
             title,
             tooltipPlacement: 'relative',
