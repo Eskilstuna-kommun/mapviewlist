@@ -1,8 +1,7 @@
 import 'Origo';
 
 const Mapviewlist = function Mapviewlist(options = {}) {
-  const tooltiptextGeneral = 'Välj vy, nuvarande vy:';
-  const links = options.links;
+  const links = options.links.links;
   const currentUrl = window.location.href;
   let activeLink = null;
   let isMainButtonActive = false;
@@ -36,7 +35,6 @@ const Mapviewlist = function Mapviewlist(options = {}) {
         tagName: 'div',
         cls: 'subbuttons-container-grid subbutton-row-grid'
       });
-
       // Loops through each link defined in index.html and finds the active link based on the current url
       links.forEach((link) => {
         if (link.url === currentUrl) {
@@ -44,18 +42,15 @@ const Mapviewlist = function Mapviewlist(options = {}) {
         }
 
         // If the active link is found, use its buttonImage as icon for mapviewlistMainButton and its tooltiptext/title
-        // Combines tooltiptextGeneral and title from index.html to display "Select view, current view: "title".
         const icon = activeLink ? activeLink.buttonImage : '#ic_baseline_link_24px';
         const title = link.title;
-        const combinedTooltip = `${tooltiptextGeneral} ${title}`;
-        const tooltipText = combinedTooltip;
 
         if (currentUrl === link.url) {
           mapviewlistMainButton = Origo.ui.Button({
-            cls: 'o-mapviewlist padding-small margin-right-small icon-smaller round light box-shadow',
+            cls: 'padding-small margin-right-small icon-smaller round light box-shadow',
             icon,
             title,
-            tooltipText,
+            tooltipText: 'Välj vy',
             tooltipPlacement: 'east',
             click() {
               toggleMainButton(mapviewlistMainButton);
@@ -75,7 +70,6 @@ const Mapviewlist = function Mapviewlist(options = {}) {
         if (currentUrl !== link.url) {
           const subButton = Origo.ui.Button({
             cls: 'subbutton-grid padding-small margin-right-small icon-smaller round light box-shadow hidden',
-            // cls: 'subbuttons-container subbutton padding-small margin-right-small icon-smaller round light box-shadow hidden',
             icon: ButtonImage,
             title,
             tooltipPlacement: 'relative',
