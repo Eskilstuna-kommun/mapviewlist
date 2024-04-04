@@ -21,28 +21,27 @@ origo.on('load', function(viewer) {
 			{
 				title: 'Map-1',
 				url: 'URL to mapview-1',
-				icon: 'map1.png'
+				buttonImage: 'map1.png'
 			},
 			{
 				title: 'Map-2',
 				url: 'URL to mapview-2',
-				icon: 'map2.png'
+				buttonImage: 'map2.png'
 			},
 			{
 				title: 'Map-3',
-				url: 'URL to mapview-3'
-			},
-			{
-				title: 'divider'
+				url: 'URL to mapview-3',
+				buttonImage: 'map3.png'
 			},
 			{
 				title: 'Map-4',
 				url: 'URL to mapview-4',
-				icon: 'map4.png'
+				buttonImage: 'map4.png'
 			},
 			{
 				title: 'Map-5',
-				url: 'URL to mapview-5'
+				url: 'URL to mapview-5',
+				buttonImage: 'map5.png'
 			}
 		],
 	});
