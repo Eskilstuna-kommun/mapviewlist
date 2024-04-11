@@ -33,7 +33,7 @@
 .subbuttons-container-grid {
   display: grid !important;
   grid-template-columns: repeat(6, 1fr); /* Skapa 6 kolumner */
-  grid-gap: 5px 0; /* Lägg till mellanrum mellan rader och kolumner */
+  grid-gap: 8px 0; /* Lägg till mellanrum mellan rader och kolumner */
   border-radius: 0.5rem !important;
   // padding: 5px;
 }

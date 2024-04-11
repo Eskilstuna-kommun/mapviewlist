@@ -1,7 +1,7 @@
 import 'Origo';
 
 const Mapviewlist = function Mapviewlist(options = {}) {
-  const links = options.links.links;
+  const links = options.links;
   const currentUrl = window.location.href;
   let activeLink = null;
   let isMainButtonActive = false;
