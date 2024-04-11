@@ -1,5 +1,6 @@
 # mapviewlist
 Provides a list of links that enables you to browse to existing views.
+The current views icon is always the one that shows in the main button, and the rest of the icons that are declared as links is shown as subbuttons in a grid with 6 columns expanded to the right.
 Works as a plugin. Instructions to follow.
 
 #### Example usage of mapviewlist as plugin
@@ -16,40 +17,36 @@ The plugin can be loaded like this in an html-file:
 var origo = Origo('index.json');
 origo.on('load', function(viewer) {
 	var mapviewlist = Mapviewlist({
-		dividerStyle: 'border-top: 1px dashed rgb(255,102,0)',
 		links: [
 			{
 				title: 'Map-1',
 				url: 'URL to mapview-1',
-				icon: 'map1.png'
+				buttonImage: 'map1.png'
 			},
 			{
 				title: 'Map-2',
 				url: 'URL to mapview-2',
-				icon: 'map2.png'
+				buttonImage: 'map2.png'
 			},
 			{
 				title: 'Map-3',
-				url: 'URL to mapview-3'
-			},
-			{
-				title: 'divider'
+				url: 'URL to mapview-3',
+				buttonImage: 'map3.png'
 			},
 			{
 				title: 'Map-4',
 				url: 'URL to mapview-4',
-				icon: 'map4.png'
+				buttonImage: 'map4.png'
 			},
 			{
 				title: 'Map-5',
-				url: 'URL to mapview-5'
+				url: 'URL to mapview-5',
+				buttonImage: 'map5.png'
 			}
 		],
-		headerTitle: 'Mapviews',
-		headerIcon: '#ic_chevron_right_24px'
 	});
 	viewer.addComponent(mapviewlist)    
-            });
-        </script>
+    	});
+</script>
 ```
 

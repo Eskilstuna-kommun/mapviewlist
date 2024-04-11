@@ -1,132 +1,122 @@
 import 'Origo';
 
 const Mapviewlist = function Mapviewlist(options = {}) {
-  const {
-    links = [],
-    dividerStyle = 'border-top: 1px dashed rgb(0,153,255)', // ~origo blue web safe
-    headerTitle = '',
-    headerIcon = '#ic_chevron_right_24px'
-  } = options;
-  let mapMenu;
+  const links = options.links;
+  const currentUrl = window.location.href;
+  let activeLink = null;
+  let isMainButtonActive = false;
+  let viewer;
+  let containerElement;
+  let mapviewlistMainButton;
+  let target;
+  const buttons = [];
+  const subButtons = [];
 
-  function createCollapseHeader() {
-    const headerButton = Origo.ui.Button({
-      cls: 'icon-smaller compact no-grow o-tooltip',
-      icon: headerIcon,
-      iconCls: 'rotate',
-      style: {
-        'align-self': 'flex-end'
-      }
-    });
-
-    const headerTitleCmp = Origo.ui.Component({
-      render() {
-        return `<div id="${this.getId()}" class="grow padding-left">${headerTitle}</div>`;
-      }
-    });
-
-    return Origo.ui.Component({
-      onRender() {
-        const el = document.getElementById(this.getId());
-        el.addEventListener('click', () => {
-          const customEvt = new CustomEvent('collapse:toggle', {
-            bubbles: true
-          });
-          el.blur();
-          el.dispatchEvent(customEvt);
-        });
-      },
-      render() {
-        return `<li id="${this.getId()}" class="flex row align-center padding-x padding-y-smaller hover pointer collapse-header" style="width: 100%;">
-                  ${headerButton.render()}
-                  ${headerTitleCmp.render()}
-                </li>`;
-      }
-    });
-  }
-
-  function createLinkItem(linkProperties) {
-    const linkIconCmp = Origo.ui.Icon({
-      cls: 'icon-smaller compact no-grow',
-      icon: linkProperties.icon || './img/png/void.png'
-    });
-
-    const linkTextCmp = Origo.ui.Element({
-      cls: 'grow padding-left',
-      innerHTML: linkProperties.title
-    });
-
-    return Origo.ui.Component({
-      onRender() {
-        const el = document.getElementById(this.getId());
-        el.addEventListener('click', () => {
-          mapMenu.close();
-          window.location.href = linkProperties.url;
-        });
-      },
-      render() {
-        return `<li id="${this.getId()}" class="flex row align-center padding-x padding-y-smaller hover pointer">
-        ${linkIconCmp.render()}
-        ${linkTextCmp.render()}
-      </li>`;
-      }
-    });
-  }
-
-  function createDividerItem() {
-    return Origo.ui.Component({
-      render() {
-        return `<hr id="${this.getId()}" style='${dividerStyle}'/>`;
-      }
-    });
-  }
-
-  function createCollapseContent() {
-    return Origo.ui.Component({
-      onInit() {
-        links.forEach(linkProps => {
-          if (linkProps.title === 'divider') {
-            this.addComponent(createDividerItem());
-          } else {
-            this.addComponent(createLinkItem(linkProps));
-          }
-        });
-      },
-      renderItems() {
-        let linkItems = '';
-        this.getComponents().forEach(contentCmp => {
-          linkItems += contentCmp.render();
-        });
-        return linkItems;
-      },
-      render() {
-        return `<ul id ="${this.getId()}" class="list margin-left">
-                ${this.renderItems()}
-              </ul>`;
-      },
-      onRender() {
-        this.dispatch('render');
-      }
-    });
+  function toggleMainButton() {
+    if (!isMainButtonActive) {
+      document.getElementById(mapviewlistMainButton.getId()).classList.add('active-border');
+      subButtons.forEach((button) => {
+        document.getElementById(button.getId()).classList.remove('hidden');
+      });
+      isMainButtonActive = true;
+    } else {
+      document.getElementById(mapviewlistMainButton.getId()).classList.remove('active-border');
+      subButtons.forEach((button) => {
+        document.getElementById(button.getId()).classList.add('hidden');
+      });
+      isMainButtonActive = false;
+    }
   }
 
   return Origo.ui.Component({
     name: 'mapviewlist',
-    onAdd(e) {
-      const viewer = e.target;
-      mapMenu = viewer.getControlByName('mapmenu');
+    onInit() {
+      containerElement = Origo.ui.Element({
+        tagName: 'div',
+        cls: 'subbuttons-container-grid subbutton-row-grid'
+      });
+      // Loops through each link defined in index.html and finds the active link based on the current url
+      links.forEach((link) => {
+        if (link.url === currentUrl) {
+          activeLink = link;
+        }
 
-      const collapseCmp = Origo.ui.Collapse({
-        headerComponent: createCollapseHeader(),
-        contentComponent: createCollapseContent(),
-        collapseX: false,
-        contentStyle: 'max-height: 300px; overflow-y: auto'
+        // If the active link is found, use its buttonImage as icon for mapviewlistMainButton and its tooltiptext/title
+        const icon = activeLink ? activeLink.buttonImage : '#ic_baseline_link_24px';
+        const title = link.title;
+
+        if (currentUrl === link.url) {
+          mapviewlistMainButton = Origo.ui.Button({
+            cls: 'padding-small margin-right-small icon-smaller round light box-shadow',
+            icon,
+            title,
+            tooltipText: 'Välj vy',
+            tooltipPlacement: 'east',
+            click() {
+              toggleMainButton(mapviewlistMainButton);
+            }
+
+          });
+        }
       });
 
-      mapMenu.appendMenuItem(collapseCmp);
-      collapseCmp.onRender();
-    }
+      buttons.push(mapviewlistMainButton);
+      // Loops through each link defined in index.html
+      links.forEach((link) => {
+        const title = link.title;
+        const ButtonImage = link.buttonImage || '#fa-external-link';
 
+        // Checks that the current link is not the main link, because its buttonImage should not be displayed on click of the main button
+        if (currentUrl !== link.url) {
+          const subButton = Origo.ui.Button({
+            cls: 'subbutton-grid padding-small margin-right-small icon-smaller round light box-shadow hidden',
+            icon: ButtonImage,
+            title,
+            tooltipPlacement: 'relative',
+            click() {
+              window.location.href = link.url;
+            }
+          });
+
+          buttons.push(subButton);
+          subButtons.push(subButton);
+        }
+      });
+    },
+    onAdd(evt) {
+      viewer = evt.target;
+      target = `${viewer.getMain().getNavigation().getId()}`; // Places the component in Navigation
+      this.addComponents(buttons);
+      this.render();
+    },
+    hide() {
+      document.getElementById(containerElement.getId()).classList.add('hidden');
+    },
+    unhide() {
+      document.getElementById(containerElement.getId()).classList.remove('hidden');
+    },
+    render() {
+      let htmlString = `${containerElement.render()}`;
+      let el = Origo.ui.dom.html(htmlString);
+      document.getElementById(target).prepend(el);
+
+      // To get the actual HTML element
+      const containerElementElement = document.getElementById(containerElement.getId());
+
+      // Renders mapviewlistMainButton
+      htmlString = mapviewlistMainButton.render();
+      el = Origo.ui.dom.html(htmlString);
+      containerElementElement.appendChild(el);
+
+      // Renders subButtons
+      subButtons.forEach((subButton) => {
+        htmlString = subButton.render();
+        el = Origo.ui.dom.html(htmlString);
+        containerElementElement.appendChild(el);
+      });
+
+      this.dispatch('render');
+    }
   });
 };
 
