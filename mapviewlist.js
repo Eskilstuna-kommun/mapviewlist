@@ -2,7 +2,7 @@ import 'Origo';
 
 const Mapviewlist = function Mapviewlist(options = {}) {
   const links = options.links;
-  const currentUrl = window.location.href;
+  const currentUrl = window.location.origin + window.location.pathname;
   let activeLink = null;
   let isMainButtonActive = false;
   let viewer;
@@ -36,6 +36,7 @@ const Mapviewlist = function Mapviewlist(options = {}) {
         cls: 'subbuttons-container-grid subbutton-row-grid'
       });
       // Loops through each link defined in index.html and finds the active link based on the current url
+
       links.forEach((link) => {
         if (link.url === currentUrl) {
           activeLink = link;
