@@ -14,12 +14,14 @@ const Mapviewlist = function Mapviewlist(options = {}) {
 
   function toggleMainButton() {
     if (!isMainButtonActive) {
+      document.getElementById(containerElement.getId()).classList.remove('subbuttons-container-grid-behind');
       document.getElementById(mapviewlistMainButton.getId()).classList.add('active-border');
       subButtons.forEach((button) => {
         document.getElementById(button.getId()).classList.remove('hidden');
       });
       isMainButtonActive = true;
     } else {
+      document.getElementById(containerElement.getId()).classList.add('subbuttons-container-grid-behind');
       document.getElementById(mapviewlistMainButton.getId()).classList.remove('active-border');
       subButtons.forEach((button) => {
         document.getElementById(button.getId()).classList.add('hidden');
@@ -33,7 +35,7 @@ const Mapviewlist = function Mapviewlist(options = {}) {
     onInit() {
       containerElement = Origo.ui.Element({
         tagName: 'div',
-        cls: 'subbuttons-container-grid subbutton-row-grid'
+        cls: 'subbuttons-container-grid subbutton-row-grid subbuttons-container-grid-behind'
       });
       // Loops through each link defined in index.html and finds the active link based on the current url
 
