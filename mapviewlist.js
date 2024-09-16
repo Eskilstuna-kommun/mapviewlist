@@ -81,6 +81,13 @@ const Mapviewlist = function Mapviewlist(options = {}) {
             }
           });
 
+          // On scrollclick, open the link in a new tab
+          document.addEventListener('auxclick', (event) => {
+            if (event.button === 1) {
+              window.open(link.url, '_blank');
+            }
+          });
+
           buttons.push(subButton);
           subButtons.push(subButton);
         }
