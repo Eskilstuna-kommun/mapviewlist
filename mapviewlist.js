@@ -88,6 +88,8 @@ const Mapviewlist = function Mapviewlist(options = {}) {
             subButtonElement.addEventListener('auxclick', (event) => {
               if (event.button === 1) {
                 window.open(link.url, '_blank');
+              } else if (event.button === 2) {
+                window.open(link.url, '_blank');
               }
             });
           });
