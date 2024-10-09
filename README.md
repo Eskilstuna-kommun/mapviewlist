@@ -10,13 +10,13 @@ Then you configure the index.html like in the example.
 
 
 The plugin can be loaded like this in an html-file:
-```
+```html
 <script src="js/origo.min.js"></script>
 <script src="plugins/mvl.js"></script>
 <script type="text/javascript">
 var origo = Origo('index.json');
 origo.on('load', function(viewer) {
-	var mapviewlist = Mapviewlist({
+	const mapviewlist = Mapviewlist({
 		links: [
 			{
 				title: 'Map-1',
