@@ -11,6 +11,10 @@ Then you configure the index.html like in the example.
 
 The plugin can be loaded like this in an html-file:
 ```html
+<link href="plugins/mapviewlist.css" rel="stylesheet">
+
+..
+
 <script src="js/origo.min.js"></script>
 <script src="plugins/mvl.js"></script>
 <script type="text/javascript">
