@@ -74,8 +74,8 @@ const Mapviewlist = function Mapviewlist(options = {}) {
           const subButton = Origo.ui.Button({
             cls: 'subbutton-grid padding-small margin-right-small icon-smaller round light box-shadow hidden',
             icon: ButtonImage,
-            title,
-            tooltipPlacement: 'relative',
+            tooltipText: title,
+            tooltipPlacement: 'east',
             click() {
               window.location.href = link.url;
             }
