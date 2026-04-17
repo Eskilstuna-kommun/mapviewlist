@@ -5,18 +5,18 @@ Works as a plugin. Instructions to follow.
 
 #### Example usage of mapviewlist as plugin
 
-First you have to create a subfolder in the Origo-map directory named plugins/ where you can put the built version of mapviewlist.
+This plugin (all three files of build/ after it has been built) expects to be put in a subfolder of the plugins/ folder of an origo instance (if there is no plugins folder it can be created) called 'mvl'.
 Then you configure the index.html like in the example.
 
 
-The plugin can be loaded like this in an html-file:
+The plugin can be loaded like this:
 ```html
-<link href="plugins/mapviewlist.css" rel="stylesheet">
+<link href="plugins/mvl/mapviewlist.css" rel="stylesheet">
 
 ..
 
 <script src="js/origo.min.js"></script>
-<script src="plugins/mvl.js"></script>
+<script src="plugins/mvl/mvl.js"></script>
 <script type="text/javascript">
 var origo = Origo('index.json');
 origo.on('load', function(viewer) {
@@ -53,4 +53,5 @@ origo.on('load', function(viewer) {
     	});
 </script>
 ```
+(The links can also be placed in a separate .json and loaded via index.html prior to creating an instance of the plugin)
 
