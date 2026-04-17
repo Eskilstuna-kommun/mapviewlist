@@ -39,8 +39,10 @@ const Mapviewlist = function Mapviewlist(options = {}) {
         cls: 'subbuttons-container-grid subbutton-row-grid subbuttons-container-grid-behind'
       });
 
+      // check if the current url matches a link exactly first, if not then if the current url without search strings does
       // put the current link first in the links array (if not part of the array then make it so)
-      const currentLinkIndex = links.findIndex((link) => link.url === currentUrl);
+      let currentLinkIndex = links.findIndex((link) => link.url === window.location.toString());
+      if (currentLinkIndex === -1) currentLinkIndex = links.findIndex((link) => link.url === currentUrl);
       if (currentLinkIndex !== -1) links.unshift(links.splice(currentLinkIndex, 1)[0]);
       else {
         links.unshift({
